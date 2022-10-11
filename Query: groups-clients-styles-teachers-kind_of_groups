@@ -1,0 +1,13 @@
+CREATE INDEX client_name ON clients(NAME);
+SELECT c.name, c.surname, s.style, k.kind AS group_kind, t.name AS teacher
+FROM groups g
+RIGHT JOIN clients c
+ON g.client = c.id_client
+INNER JOIN styles s
+ON g.style = s.id_style
+INNER JOIN kinds_of_groups k
+ON g.kind_of_group = k.id_kind_group
+INNER JOIN teachers t
+ON g.techer = t.id_teacher
+ORDER BY c.name;
+DROP INDEX;
