@@ -1,0 +1,15 @@
+CREATE INDEX age_restrictions ON groups(age_restrictions);
+SELECT c.name AS client_name, c.surname AS client_surname,
+((YEAR(CURRENT_DATE) - YEAR(c.date_of_birth)) -                             
+(DATE_FORMAT(CURRENT_DATE, '%m%d') < DATE_FORMAT(c.date_of_birth, '%m%d'))) AS client_age,
+t.name AS teacher, s.style, g.age_restrictions, g.timetable, g.time
+FROM groups g
+INNER JOIN clients c
+ON c.id_client = g.client
+INNER JOIN teachers t
+ON g.techer = t.id_teacher
+INNER JOIN styles s
+ON g.style = s.id_style
+WHERE g.age_restrictions LIKE "1%8"
+ORDER BY c.name;
+DROP INDEX;
