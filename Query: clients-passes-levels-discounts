@@ -1,0 +1,11 @@
+CREATE INDEX discount_percents ON discounts(discount_percents);
+SELECT c.name, c.surname, l.name_level AS level, p.number_of_trainings, d.discount_percents
+FROM clients c
+LEFT JOIN passes p
+ON c.pass = p.id_pass
+INNER JOIN levels l
+ON p.level = l.id_level
+INNER JOIN discounts d
+ON c.active_discount = d.id_discount
+WHERE discount_percents = 10;
+DROP INDEX;
